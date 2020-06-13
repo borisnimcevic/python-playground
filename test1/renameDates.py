@@ -10,8 +10,24 @@ detePattern = re.compile(r"""^(.*?) #all text before the date
 	""", re.VERBOSE)
 
 #Loop over the files in the working directory
-#Skip Files without a date
-#Get the different parts of the filename
-#From the European-style filename
-#Get the full, absolute file paths.
-#Rename the files
+for amerFilename in os.listdir('.'):
+	mo = detePattern.search(amerFilename)
+
+	if mo == None:
+		continue
+
+	beforePart = mo.group(1)
+	monthPart = mo.group(2)
+	dayPart = mo.group(4)
+	yearPart = mo.group(6)
+	afterPart = mo.group(8)
+	#From the European-style filename
+	euroFilename = beforePart + dayPart + '-' + monthPart + '-' + yearPart + afterPart
+
+	#Get the full, absolute file paths.
+	absWorkingDir = os.path.abspath('.')
+	amerFilename = os.path.join(absWorkingDir, amerFilename)
+	euroFilename = os.path.join(absWorkingDir, euroFilename)
+	#Rename the files
+	print('Renaming "%s" to "%s"...' % (amerFilename, euroFilename))
+	shutil.move(amerFilename, euroFilename) #uncoment after testing
