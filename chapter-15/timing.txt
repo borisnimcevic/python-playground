@@ -1,0 +1,2 @@
+Slow: Took 53.37259364128113 seconds to download.
+Fast: Took 6.199596643447876 seconds to download.
